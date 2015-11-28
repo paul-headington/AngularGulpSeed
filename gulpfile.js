@@ -14,10 +14,11 @@ var inject = require('gulp-inject');
 var wiredep = require('wiredep').stream;
 var sass = require('gulp-sass');
 var open = require('gulp-open');
+var karma = require('karma');
 
 
 // tasks
-gulp.task('lint', function() {
+gulp.task('lint', function () {
   gulp.src(['./app/**/*.js', '!./bower_components/**'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
@@ -75,12 +76,11 @@ gulp.task('sass', function () {
     
 });
 
-
 gulp.task('minify-css', function() {
   var opts = {comments:true,spare:true};
   gulp.src(['./assets/**/*.css', '!./bower_components/**'])
     .pipe(minifyCSS(opts))
-    .pipe(gulp.dest('./dist/assets/'))
+    .pipe(gulp.dest('./dist/assets/'));
 });
 
 gulp.task('clean-angular', function(){
@@ -95,7 +95,7 @@ gulp.task('minify-js', function() {
       // inSourceMap:
       // outSourceMap: "app.js.map"
     }))
-    .pipe(gulp.dest('./dist/app/'))
+    .pipe(gulp.dest('./dist/app/'));
 });
 
 gulp.task('copy-bower-components', function () {
@@ -115,9 +115,20 @@ gulp.task('copy-assets', function() {
     .pipe(gulp.dest('./dist/assets/'));
 });
 
+gulp.task('test', function() {
+    server = new karma.Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+      });
+    server.start();
+    
+  
+});
+
+
 gulp.task('watch', function(){
     console.log("watching....");
-    gulp.watch('./app/**/*.js', ['inject-index']);        
+    gulp.watch('./app/**/*.js', ['inject-index','sass','test']);        
     //gulp.watch('./bower_components/**', ['bower']);
     gulp.watch('./app/**/*.scss', ['sass']);
     gulp.watch('./assets/**/*.css', ['inject-index']);

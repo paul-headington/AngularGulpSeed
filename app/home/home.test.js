@@ -11,13 +11,18 @@ describe('Controller: HomeController', function () {
       scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {    
+  beforeEach(inject(function ($controller, $rootScope) {
 
     scope = $rootScope.$new();
-    HomeController = $controller('HomeController', {
+    MainCtrl = $controller('HomeController', {
       $scope: scope
     });
   }));
+
+  it('should start a scope var test with a value of testing...', function () {
+    
+    expect(scope.test).toEqual('testing...')
+  });
 
  
 });

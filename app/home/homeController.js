@@ -6,7 +6,7 @@ angular.module('angular-seed')
     
     console.log("home controller loaded");
 
-      $scope.test = "Testing...";
+      $scope.test = "testing...";
     
   }]);
     
