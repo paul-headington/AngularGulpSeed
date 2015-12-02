@@ -21,7 +21,7 @@ describe('Controller: HomeController', function () {
 
   it('should start a scope var test with a value of testing...', function () {
     
-    expect(scope.test).toEqual('testing...')
+    expect(scope.test).toEqual('testing...');
   });
 
  

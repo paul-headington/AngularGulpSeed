@@ -76,6 +76,11 @@ gulp.task('sass', function () {
     
 });
 
+gulp.task('html', function () {
+  gulp.src('./app/**/*.html')
+    .pipe(connect.reload());
+});
+
 gulp.task('minify-css', function() {
   var opts = {comments:true,spare:true};
   gulp.src(['./assets/**/*.css', '!./bower_components/**'])
@@ -125,12 +130,12 @@ gulp.task('test', function() {
   
 });
 
-
 gulp.task('watch', function(){
     console.log("watching....");
-    gulp.watch('./app/**/*.js', ['inject-index','sass','test']);        
+    gulp.watch('./app/**/*.js', ['inject-index','sass']);        
     //gulp.watch('./bower_components/**', ['bower']);
     gulp.watch('./app/**/*.scss', ['sass']);
+    gulp.watch('./app/**/*.html', ['html']);
     gulp.watch('./assets/**/*.css', ['inject-index']);
 });
 
